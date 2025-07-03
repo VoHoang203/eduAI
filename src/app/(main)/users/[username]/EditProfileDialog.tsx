@@ -1,4 +1,3 @@
-import avatarPlaceholder from '/avatar-placeholder.png';
 import CropImageDialog from '@/components/CropImageDialog';
 import LoadingButton from '@/components/LoadingButton';
 import {
@@ -86,7 +85,7 @@ export default function EditProfileDialog({
             src={
               croppedAvatar
                 ? URL.createObjectURL(croppedAvatar)
-                : user.avatarUrl || avatarPlaceholder
+                : user.avatarUrl || '/avataplaceholder.png'
             }
             onImageCropped={setCroppedAvatar}
           />

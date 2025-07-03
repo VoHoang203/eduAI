@@ -1,11 +1,11 @@
-import loginImage from "/login-image.jpg";
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import LoginForm from "./LoginForm";
+
+import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import LoginForm from './LoginForm';
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: 'Login',
 };
 
 export default function Page() {
@@ -22,9 +22,11 @@ export default function Page() {
           </div>
         </div>
         <Image
-          src={loginImage}
-          alt=""
+          src="/login-image.jpg"
+          alt="img"
           className="hidden w-1/2 object-cover md:block"
+          width="500"
+          height={500}
         />
       </div>
     </main>

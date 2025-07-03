@@ -15,7 +15,7 @@ const CourseLayout = async ({
   params: { courseId: string };
 }) => {
   const { user } = await validateRequest();
-  const {courseId} = await params;
+  const { courseId } = await params;
   if (!user) {
     return redirect('/');
   }
@@ -32,7 +32,7 @@ const CourseLayout = async ({
         include: {
           userProgress: {
             where: {
-              userId:user.id,
+              userId: user.id,
             },
           },
         },
@@ -50,11 +50,11 @@ const CourseLayout = async ({
   const progressCount = await getProgress(user.id, course.id);
 
   return (
-    <div className="h-full">
-      <div className="h-[80px] md:pl-80 fixed inset-y-0 w-full z-50">
+    <div className="h-full flex-wrap top-16">
+      <div className="h-[80px] md:pl-80 fixed inset-y-12 w-full">
         <CourseNavbar course={course} progressCount={progressCount} />
       </div>
-      <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50">
+      <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-12">
         <CourseSidebar course={course} progressCount={progressCount} />
       </div>
       <main className="md:pl-80 pt-[80px] h-full">{children}</main>
