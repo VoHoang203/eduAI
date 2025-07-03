@@ -31,7 +31,7 @@ export default function PostEditor() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: startUpload,
   });
-  const { onClick, ...rootProps } = getRootProps();
+  const {  ...rootProps } = getRootProps();
 
   const editor = useEditor({
     extensions: [
@@ -189,7 +189,7 @@ interface AttachmentPreviewProps {
 }
 
 function AttachmentPreview({
-  attachment: { file, mediaId, isUploading },
+  attachment: { file, isUploading },
   onRemoveClick,
 }: AttachmentPreviewProps) {
   const src = URL.createObjectURL(file);
