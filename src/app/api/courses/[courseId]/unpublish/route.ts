@@ -8,6 +8,7 @@ export async function PATCH(
 ) {
   try {
     const { user } = await validateRequest();
+    const { courseId } = await params;
 
     /* 
 			Check if there's a logged in user (authentication)
@@ -22,7 +23,7 @@ export async function PATCH(
 		*/
     const course = await prisma.course.findUnique({
       where: {
-        id: params.courseId,
+        id: courseId,
         userId: user.id,
       },
     });
@@ -37,7 +38,7 @@ export async function PATCH(
 		*/
     const unpublishedCourse = await prisma.course.update({
       where: {
-        id: params.courseId,
+        id: courseId,
         userId: user.id,
       },
       data: {

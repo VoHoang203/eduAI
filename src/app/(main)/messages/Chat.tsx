@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Loader2 } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useState } from "react";
-import { Chat as StreamChat } from "stream-chat-react";
-import ChatChannel from "./ChatChannel";
-import ChatSidebar from "./ChatSidebar";
-import useInitializeChatClient from "./useInitializeChatClient";
+import { Loader2 } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useState } from 'react';
+import { Chat as StreamChat } from 'stream-chat-react';
+import ChatChannel from './ChatChannel';
+import ChatSidebar from './ChatSidebar';
+import useInitializeChatClient from './useInitializeChatClient';
 
 export default function Chat() {
   const chatClient = useInitializeChatClient();
@@ -21,13 +21,13 @@ export default function Chat() {
 
   return (
     <main className="relative w-full overflow-hidden rounded-2xl bg-card shadow-sm">
-      <div className="bottom-0 top-0 flex w-full">
+      <div className="bottom-0 top-0 flex w-[850px]">
         <StreamChat
           client={chatClient}
           theme={
-            resolvedTheme === "dark"
-              ? "str-chat__theme-dark"
-              : "str-chat__theme-light"
+            resolvedTheme === 'dark'
+              ? 'str-chat__theme-dark'
+              : 'str-chat__theme-light'
           }
         >
           <ChatSidebar

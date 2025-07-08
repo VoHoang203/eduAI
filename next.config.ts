@@ -22,8 +22,17 @@ const nextConfig: NextConfig = {
         hostname: 'utfs.io',
       },
     ],
-  }, 
-  
+  },
+  rewrites: async () => {
+    return {
+      fallback: [
+        {
+          source: '/hashtag/:tag',
+          destination: '/search?q=%23:tag',
+        },
+      ],
+    };
+  },
 };
 
 export default nextConfig;

@@ -13,10 +13,6 @@ import { cache } from 'react';
 import UserPosts from './UserPosts';
 import EditProfileButton from './EditProfileButton';
 
-interface PageProps {
-  params: { username: string };
-}
-
 const getUser = cache(async (username: string, loggedInUserId: string) => {
   const user = await prisma.user.findFirst({
     where: {
@@ -34,10 +30,12 @@ const getUser = cache(async (username: string, loggedInUserId: string) => {
 });
 
 export async function generateMetadata({
-  params: { username },
-}: PageProps): Promise<Metadata> {
+  params,
+}: {
+  params: { username: string };
+}): Promise<Metadata> {
   const { user: loggedInUser } = await validateRequest();
-
+  const { username } = params;
   if (!loggedInUser) return {};
 
   const user = await getUser(username, loggedInUser.id);
@@ -47,9 +45,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params: { username } }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: { username: string };
+}) {
   const { user: loggedInUser } = await validateRequest();
-
+  const { username } = params;
   if (!loggedInUser) {
     return (
       <p className="text-destructive">

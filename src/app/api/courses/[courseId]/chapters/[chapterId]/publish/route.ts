@@ -6,6 +6,7 @@ export async function PATCH(
   req: Request,
   { params }: { params: { courseId: string; chapterId: string } },
 ) {
+  const {courseId, chapterId} = await params;
   try {
     /* 
 			Check if there's a logged in user (authentication)
@@ -21,7 +22,7 @@ export async function PATCH(
 		*/
     const courseOwner = await prisma.course.findUnique({
       where: {
-        id: params.courseId,
+        id: courseId,
         userId:user.id,
       },
     });
@@ -37,14 +38,14 @@ export async function PATCH(
 		*/
     const chapter = await prisma.chapter.findUnique({
       where: {
-        id: params.chapterId,
-        courseId: params.courseId,
+        id: chapterId,
+        courseId: courseId,
       },
     });
 
     const muxData = await prisma.muxData.findUnique({
       where: {
-        chapterId: params.chapterId,
+        chapterId: chapterId,
       },
     });
 
@@ -64,8 +65,8 @@ export async function PATCH(
 		*/
     const publishedChapter = await prisma.chapter.update({
       where: {
-        id: params.chapterId,
-        courseId: params.courseId,
+        id: chapterId,
+        courseId: courseId,
       },
       data: {
         isPublished: true,

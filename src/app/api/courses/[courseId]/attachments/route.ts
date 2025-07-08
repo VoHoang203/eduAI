@@ -1,13 +1,14 @@
-import { prisma } from "@/db/prisma";
+import { prisma } from '@/db/prisma';
 import { validateRequest } from '@/auth';
 import { NextResponse } from 'next/server';
 
 export async function POST(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseId: string } },
 ) {
   try {
     const { user } = await validateRequest();
+    const { courseId } = await params;
 
     /* 
 			This req body will came from a post req from attachment-form.tsx
@@ -27,7 +28,7 @@ export async function POST(
 		*/
     const courseOwner = await prisma.course.findUnique({
       where: {
-        id: params.courseId,
+        id: courseId,
         userId: user.id,
       },
     });
@@ -40,7 +41,7 @@ export async function POST(
       data: {
         url,
         name: url.split('/').pop(),
-        courseId: params.courseId,
+        courseId: courseId,
       },
     });
 

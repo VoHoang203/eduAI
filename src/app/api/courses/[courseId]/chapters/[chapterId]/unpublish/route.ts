@@ -11,6 +11,8 @@ export async function PATCH(
 			Check if there's a logged in user (authentication)
 		*/
     const { user } = await validateRequest();
+    const { courseId, chapterId } = await params;
+
     if (!user) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
@@ -21,8 +23,8 @@ export async function PATCH(
 		*/
     const courseOwner = await prisma.course.findUnique({
       where: {
-        id: params.courseId,
-        userId:user.id,
+        id: courseId,
+        userId: user.id,
       },
     });
 
@@ -37,8 +39,8 @@ export async function PATCH(
 		*/
     const unpublishedChapter = await prisma.chapter.update({
       where: {
-        id: params.chapterId,
-        courseId: params.courseId,
+        id: chapterId,
+        courseId: courseId,
       },
       data: {
         isPublished: false,
@@ -58,7 +60,7 @@ export async function PATCH(
 		*/
     const publishedChaptersInCourse = await prisma.chapter.findMany({
       where: {
-        courseId: params.courseId,
+        courseId: courseId,
         isPublished: true,
       },
     });
@@ -66,7 +68,7 @@ export async function PATCH(
     if (!publishedChaptersInCourse.length) {
       await prisma.course.update({
         where: {
-          id: params.courseId,
+          id: courseId,
         },
         data: {
           isPublished: false,
