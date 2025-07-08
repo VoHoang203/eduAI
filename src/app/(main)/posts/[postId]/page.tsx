@@ -12,10 +12,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { cache, Suspense } from 'react';
 
-interface PageProps {
-  params: { postId: string };
-}
-
 const getPost = cache(async (postId: string, loggedInUserId: string) => {
   const post = await prisma.post.findUnique({
     where: {
@@ -45,9 +41,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params: { postId } }: PageProps) {
+export default async function Page({ params }: { params: { postId: string } }) {
   const { user } = await validateRequest();
 
+  const { postId } = await params;
   if (!user) {
     return (
       <p className="text-destructive">
