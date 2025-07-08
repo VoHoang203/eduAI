@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
         hostname: 'utfs.io',
       },
     ],
-  },
+  }, 
   
 };
 

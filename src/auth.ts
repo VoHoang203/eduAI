@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { Lucia, Session, User } from "lucia";
-const { cookies } = await import('next/headers')
+import { cookies } from "next/headers";
 import { cache } from "react";
 import {prisma} from "@/db/prisma";
 
