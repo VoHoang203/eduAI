@@ -44,7 +44,7 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: { postId: string } }) {
   const { user } = await validateRequest();
 
-  const { postId } = await params;
+  const { postId } = params;
   if (!user) {
     return (
       <p className="text-destructive">
